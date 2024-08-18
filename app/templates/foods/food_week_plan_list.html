@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row text-center">
+    <div class="col-12 col-lg-2 mb-2 mb-lg-0 p-3 border-dark border me-2">
+        <h2>Week1</h2>
+        <hr>
+        {% for food in week1 %}
+        <a class="text-dark"
+            href="{% url 'food-detail' food.pk %}">
+            {{ food.name }}
+        </a><br>
+        {% empty %}
+        <p>Week1 is empty.</p>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-lg-2 mb-2 mb-lg-0 p-3 border-dark border me-2">
+        <h2>Week2</h2>
+        <hr>
+        {% for food in week2 %}
+        <a class="text-dark"
+            href="{% url 'food-detail' food.pk %}">
+            {{ food.name }}
+        </a><br>
+        {% empty %}
+        <p>Week2 is empty.</p>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-lg-2 mb-2 mb-lg-0 p-3 border-dark border me-2">
+        <h2>Week3</h2>
+        <hr>
+        {% for food in week3 %}
+        <a class="text-dark"
+            href="{% url 'food-detail' food.pk %}">
+            {{ food.name }}
+        </a><br>
+        {% empty %}
+        <p>Week3 is empty.</p>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-lg-2 mb-2 mb-lg-0 p-3 border-dark border me-2">
+        <h2>Week4</h2>
+        <hr>
+        {% for food in week4 %}
+        <a class="text-dark"
+            href="{% url 'food-detail' food.pk %}">
+            {{ food.name }}
+        </a><br>
+        {% empty %}
+        <p>Week4 is empty.</p>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-lg-2 mb-2 mb-lg-0 p-3 border-dark border me-2">
+        <h2>Week5</h2>
+        <hr>
+        {% for food in week5 %}
+        <a class="text-dark"
+            href="{% url 'food-detail' food.pk %}">
+            {{ food.name }}
+        </a><br>
+        {% empty %}
+        <p>Week5 is empty.</p>
+        {% endfor %}
+    </div>
+
+    
+ 
+        
+
+
+</div>
+{% endblock content %}

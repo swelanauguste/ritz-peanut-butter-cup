@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="row">
+        <div class="col-lg-2">
+            {% for food in object_list %}
+            <a class="text-dark"
+                href="{% url 'food-detail' food.pk %}">{{ food.name }}
+                ({{ food.family }})</a><br>
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for family in unique_families %}
+            <a class="btn btn-sm btn-outline-dark m-1 rounded-pill"
+                href="{% url 'food-choices' %}?family={{family}}">{{family}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
