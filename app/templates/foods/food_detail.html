@@ -3,56 +3,53 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-6 mb-2 mb-lg-0">
-        <div class="rounded-5 p-3 text-center border-dark">
-            <h2>{{ food.name }}</h2>
-
-            <p>Family: {{ food.family }}</p>
-            <p>Friendly Family Name:
-                {{food.friendly_family_name|default:'N/A' }}</p>
-            <p>Group: {{ food.group }}</p>
-            <p
-                class="fw-bold {% if food.is_allergic %} text-danger {% else %} text-success {% endif %}">
-                Allergic: {{ food.is_allergic|yesno:"yes,no,maybe"|title }}
-            </p>
-
-            <p>Gluten Free:
-                {{ food.is_gluten_free|yesno:"yes,no,maybe"|title }}</p>
-            <p>Tags:
-                {% for tag in food.tags.all %}
-                <span class="badge text-bg-secondary"
-                    href="">{{tag|lower}}</span>
-                {% endfor %}
-            </p>
-            <p>Week Plan:
-                {% for week in food.add_to_week_plan.all %}
-                <span class="text-dark small"
-                    href="">{{week|title}}</span>
-                {% endfor %}
-            </p>
-            <span>related foods</span><br>
-            {% for related_food in related_foods %}
-            <a class="badge text-bg-success"
-                href="{% url 'food-detail' related_food.pk %}">
-                {{ related_food.name }}</a>
-            {% empty %}
-            <p>No related foods found.</p>
+<div class="col-lg-4 mb-2 mb-lg-0 border rounded-4 shadow">
+    <div class="rounded-5 px-5 py-3 text-ceter border-dark">
+        <h2>{{ food.name }}</h2>
+        <hr>
+        {% if food.is_allergic %}
+        <p
+            class="fw-bold {% if food.is_allergic %} text-danger {% else %} text-success {% endif %}">
+            Allergic: {{ food.is_allergic|yesno:"yes,no,maybe"|lower }}
+        </p>
+        {% endif %}
+        <p class="small">
+            {{ food.is_gluten_free|yesno:",not,maybe"|lower }} gluten free*</p>
+        <p>
+            {% for tag in food.tags.all %}
+            <span class="badge text-bg-secondary"
+                href="">{{tag|lower}}</span>
             {% endfor %}
-        </div>
+        </p>
 
+        {% if food.add_to_week_plan %}
+        <p>
+            {% for week in food.add_to_week_plan.all %}
+            <span class="badge text-bg-warning"
+                href="">{{week|lower}}</span>
+            {% endfor %}
+        </p>
+        {% endif %}
+
+        <span>related</span><br>
+        {% for related_food in related_foods %}
+        <a class="badge text-bg-success"
+            href="{% url 'food-detail' related_food.pk %}">
+            {{ related_food.name|lower }}</a>
+        {% empty %}
+        <p>No related foods found.</p>
+        {% endfor %}
     </div>
-    <div class="col">
-        <div class="p-3">
-            <form method="post">
-                {% csrf_token %}
+<hr>
+    <div class="px-5 py-3">
+        <form method="post">
+            {% csrf_token %}
                 {{ form|crispy }}
-                <div class="d-grid mt-3">
-                    <button class="btn btn-dark rounded-pill px-5"
-                        type="submit">Update</button>
-                </div>
-            </form>
-        </div>
+            <div class="d-rid mt-3">
+                <button class="btn btn-sm btn-dark rounded-pill px-5"
+                    type="submit">submit</button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock content %}

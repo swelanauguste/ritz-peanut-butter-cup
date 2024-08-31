@@ -2,24 +2,76 @@
 
 
 {% block content %}
-<div class="container py-5">
-
+   <form method="get">
     <div class="row">
-        <div class="col-lg-2">
-            {% for food in object_list %}
-            <a class="text-dark"
-                href="{% url 'food-detail' food.pk %}">{{ food.name }}
-                ({{ food.family }})</a><br>
-            {% endfor %}
+        <!-- Column 1 -->
+        <div class="col-md-3">
+            <select class="form-control" name="food1" onchange="this.form.submit()">
+                <option value="">Select Food</option>
+                {% for food in choice1 %}
+                    <option value="{{ food.id }}" {% if food.id|stringformat:"s" == selected_food1 %}selected{% endif %}>
+                        {{ food.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <ul>
+                {% for food in food_list1 %}
+                    <li>{{ food.name }}</li>
+                {% endfor %}
+            </ul>
         </div>
-        <div class="col">
-            {% for family in unique_families %}
-            <a class="btn btn-sm btn-outline-dark m-1 rounded-pill"
-                href="{% url 'food-choices' %}?family={{family}}">{{family}}</a>
-            {% endfor %}
+
+        <!-- Column 2 -->
+        <div class="col-md-3">
+            <select class="form-control" name="food2" onchange="this.form.submit()">
+                <option value="">Select Food</option>
+                {% for food in choice2 %}
+                    <option value="{{ food.id }}" {% if food.id|stringformat:"s" == selected_food2 %}selected{% endif %}>
+                        {{ food.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <ul>
+                {% for food in food_list2 %}
+                    <li>{{ food.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="col-md-3">
+            <select class="form-control" name="food3" onchange="this.form.submit()">
+                <option value="">Select Food</option>
+                {% for food in choice3 %}
+                    <option value="{{ food.id }}" {% if food.id|stringformat:"s" == selected_food3 %}selected{% endif %}>
+                        {{ food.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <ul>
+                {% for food in food_list3 %}
+                    <li>{{ food.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="col-md-3">
+            <select class="form-control" name="food4" onchange="this.form.submit()">
+                <option value="">Select Food</option>
+                {% for food in choice4 %}
+                    <option value="{{ food.id }}" {% if food.id|stringformat:"s" == selected_food4 %}selected{% endif %}>
+                        {{ food.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <ul>
+                {% for food in food_list4 %}
+                    <li>{{ food.name }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-
-</div>
+</form>
 
 {% endblock content %}

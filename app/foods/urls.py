@@ -9,5 +9,5 @@ urlpatterns = [
     path(
         "food-week-plan/", views.FoodWeekPlanListView.as_view(), name="food-week-plan"
     ),
-    path("food-choices/", views.FoodChoiceListView.as_view(), name="food-choices"),
+    path("food-choices/", views.food_choice_list_view, name="food-choices"),
 ]

@@ -1,6 +1,6 @@
 import csv
 from django.core.management.base import BaseCommand
-from ...models import Food, Tag
+from ...models import Food, Tag, Group, Family
 
 class Command(BaseCommand):
     help = 'Load food data from a CSV file'
@@ -19,10 +19,8 @@ class Command(BaseCommand):
                 food, created = Food.objects.update_or_create(
                     name=row['NAME'],
                     defaults={
-                        'family': row['FAMILY'],
-                        'friendly_family_name': row['FAMILY EASY NAME'],
-                        'group': row['GROUP'],
-                        'is_allergic': row['ALLERGIC'].lower() == 'true',
+                        'family': Family.objects.get(name=row['FAMILY'].lower().strip()),
+                        'group': Group.objects.get(name=row['GROUP'].lower().strip()),
                     }
                 )
 

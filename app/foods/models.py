@@ -12,7 +12,7 @@ class Tag(models.Model):
 class WeekPlan(models.Model):
     week = models.CharField(max_length=5, unique=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=1)
-    
+
     class Meta:
         ordering = ["week"]
 
@@ -20,12 +20,33 @@ class WeekPlan(models.Model):
         return self.week
 
 
+class Family(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "families"
+
+    def __str__(self):
+        return self.name
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "families"
+
+    def __str__(self):
+        return self.name
+
+
 class Food(models.Model):
     like = models.BooleanField(default=False)
     name = models.CharField(max_length=50)
-    family = models.CharField(max_length=50, blank=True)
-    friendly_family_name = models.CharField(max_length=50, blank=True)
-    group = models.CharField(max_length=50)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='foods', null=True, blank=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='foods', null=True, blank=True)
     is_allergic = models.BooleanField(default=False)
     is_gluten_free = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, blank=True)
